@@ -1,22 +1,25 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  const [ sidebarList, setSidebarList ] = useState([]);
+  console.log(sidebarList);
+  useEffect(()=>{
+    const getData = async () => {
+      const response = await fetch(
+        `http://18.170.51.237:3000/website/findCategoryAndProducts?isActive=true&storeId=1-2021`
+      );
+      const data = await response.json();
+      setSidebarList(data);
+    };
+    getData();
+  }, [])
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+       {
+         sidebarList?.categories?.map(item => <li key={item._id}>{item.categoryName}</li>)
+       }
       </header>
     </div>
   );
