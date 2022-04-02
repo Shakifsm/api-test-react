@@ -4,16 +4,18 @@ import './App.css';
 function App() {
   const [ sidebarList, setSidebarList ] = useState([]);
   console.log(sidebarList);
+  
   useEffect(()=>{
     const getData = async () => {
       const response = await fetch(
-        `https://api-test-react.vercel.app//website/findCategoryAndProducts?isActive=true&storeId=1-2021`
+        `http://18.170.51.237:3000/website/findCategoryAndProducts?isActive=true&storeId=1-2021`
       );
       const data = await response.json();
       setSidebarList(data);
     };
     getData();
   }, [])
+
   return (
     <div className="App">
       <header className="App-header">
