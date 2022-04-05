@@ -8,7 +8,7 @@ function App() {
   useEffect(()=>{
     const getData = async () => {
       const response = await fetch(
-        `https://devoretapi.co.uk/api/v1/website/getRestaurantContent/5f0c174d7c3bf80552f07947`
+        `https://devoretapi.co.uk/api/v1/website/getRestaurantContent/61b6fa7db0f0f8e3bc44c7d9`
       );
       const data = await response.json();
       setRestaurant(data);
@@ -29,7 +29,12 @@ function App() {
            <h6>{item.day_name}</h6>
            
              {
-               item?.default?.map( time => <h6 key={time._id}>{time.opening_time} <br /> {time.closing_time} </h6> )
+               item?.default?.map( time =>
+               <div key={time._id}>
+                 <h5>Shift : {time.shift_name}</h5>
+                 <h6>Opening Time : {time.opening_time} <br /> Closing Time : {time.closing_time} </h6>
+               </div>
+               )
              }
            
          </div> 
